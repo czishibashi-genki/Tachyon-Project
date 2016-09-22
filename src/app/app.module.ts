@@ -6,15 +6,14 @@ import { routing, appRoutingProviders } from './app.routing'
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
 import { RequestComponent } from './request/request.component';
 import { UserComponent } from './user/user.component';
+import { GoogleApiService } from './services/google-api.service'
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    LoginComponent,
     RequestComponent,
     UserComponent
   ],
@@ -25,7 +24,8 @@ import { UserComponent } from './user/user.component';
     routing
   ],
   providers: [
-    appRoutingProviders
+    appRoutingProviders,
+    GoogleApiService
   ],
   bootstrap: [AppComponent]
 })

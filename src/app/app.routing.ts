@@ -7,7 +7,6 @@ import { RequestComponent } from './request/request.component'
 
 const appRoutes: Routes = [
   { path: '', component:  HomeComponent },
-  { path: 'login', component:  LoginComponent },
   { path: 'users/:userId', component:  UserComponent },
   { path: 'requests', component:  RequestComponent },
   { path: '**', component: HomeComponent }

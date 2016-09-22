@@ -2,7 +2,20 @@
   <a routerLink="/">{{title}}</a>
 </h1>
 
+<div (click)="reload()">
+  hogeeeeeeeee
+</div>
+
 <a routerLink="/login">ログイン</a>
 <a routerLink="/users/{{1}}">マイページ</a>
 <a routerLink="/requests">申請</a>
+<a href="#" (click)="logout()">ログアウト</a>
  <router-outlet></router-outlet>
+
+ <div class="login-wrapper">
+   <p>You need to log in.</p>
+   <div id="{{googleLoginButtonId}}"></div>
+ </div>
+ <div class="main-application">
+   <p>Hello, {{userDisplayName}}!</p>
+ </div>

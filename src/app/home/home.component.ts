@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { BookService } from '../services/book.service'
 
 @Component({
@@ -9,9 +9,14 @@ import { BookService } from '../services/book.service'
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private bookService: BookService) { }
 
   ngOnInit() {
+    this.bookService.find();
   }
 
+  reload() {
+    console.log('reload');
+    this.bookService.find();
+  }
 }

@@ -18,7 +18,6 @@ export class UserComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.forEach( (params: Params) => {
-        console.log(params);
         this.userId = +params['userId'];
     })
   }

@@ -5,10 +5,11 @@ import { HttpModule } from '@angular/http';
 import { routing, appRoutingProviders } from './app.routing'
 
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
-import { RequestComponent } from './request/request.component';
-import { UserComponent } from './user/user.component';
-import { GoogleApiService } from './services/google-api.service'
+import { HomeComponent } from './components/home/home.component';
+import { RequestComponent } from './components/request/request.component';
+import { UserComponent } from './components/user/user.component';
+import { GoogleApiService } from './modules/google-api.service'
+import { SpreadsheetClient } from './modules/spreadsheet-client.service'
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { GoogleApiService } from './services/google-api.service'
   ],
   providers: [
     appRoutingProviders,
-    GoogleApiService
+    GoogleApiService,
+    SpreadsheetClient
   ],
   bootstrap: [AppComponent]
 })

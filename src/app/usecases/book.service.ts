@@ -1,23 +1,19 @@
 import { Injectable } from '@angular/core';
-import { Book } from '../domains/book';
-import { SpreadsheetClient } from '../modules/spreadsheet-client.service'
+import { Jsonp } from '@angular/http';
 // declare var gapi: any;
 // import * as dataDrive from 'data-drive';
 
 @Injectable()
 export class BookService {
-  sheetName = 'book';
-  constructor(private sheetClient: SpreadsheetClient) {
+  config = {
+    "clientId": "228296162445-4g222pvlptji16gvnil2uteo9kvnk6f6.apps.googleusercontent.com"
+  }
+  constructor() {
     // let dd = require('data-drive')
   }
 
-  findAll() {
-    console.log('findAll');
-    return this.sheetClient.get('book', 'A1:10');//.subscribe(
-      // res => {
-      //   return res.json().values.map( row => {
-      //     return new Book(row[0]);
-      //   });
+  find() {
+    console.log('find');
     // let url = 'https://sheets.googleapis.com/v4/spreadsheets/1mUSW4E9sG3PWtOPSKnMIs42XquUusMSJU7MBLKdD78g/values/A1\?Authorization\=' + this.userAuthToken;
     // this.http.get(url)
     // .map(console.log(this.extractData);

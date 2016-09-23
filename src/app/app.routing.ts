@@ -1,9 +1,8 @@
 import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from './home/home.component'
-import { UserComponent } from './user/user.component'
-import { LoginComponent } from './login/login.component'
-import { RequestComponent } from './request/request.component'
+import { HomeComponent } from './components/home/home.component'
+import { UserComponent } from './components/user/user.component'
+import { RequestComponent } from './components/request/request.component'
 
 const appRoutes: Routes = [
   { path: '', component:  HomeComponent },

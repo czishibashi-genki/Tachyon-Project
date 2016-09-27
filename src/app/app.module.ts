@@ -8,15 +8,17 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { RequestComponent } from './components/request/request.component';
 import { UserComponent } from './components/user/user.component';
+import { LoginComponent } from './components/login/login.component'
 import { GoogleApiService } from './modules/google-api.service'
-import { SpreadsheetClient } from './modules/spreadsheet-client.service'
+import { SpreadsheetClient } from './modules/spreadsheet-client.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     RequestComponent,
-    UserComponent
+    UserComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

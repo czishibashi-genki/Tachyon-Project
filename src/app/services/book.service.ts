@@ -13,14 +13,6 @@ export class BookService {
 
   findAll() {
     console.log('findAll');
-    return this.sheetClient.get('book', 'A1:10');//.subscribe(
-      // res => {
-      //   return res.json().values.map( row => {
-      //     return new Book(row[0]);
-      //   });
-    // let url = 'https://sheets.googleapis.com/v4/spreadsheets/1mUSW4E9sG3PWtOPSKnMIs42XquUusMSJU7MBLKdD78g/values/A1\?Authorization\=' + this.userAuthToken;
-    // this.http.get(url)
-    // .map(console.log(this.extractData);
-    // console.log('search');
+    return this.sheetClient.get('book', 'A1:10');
   }
 }

@@ -1,10 +1,16 @@
 <p>
   home works!
 </p>
-<div (click)="reload()">
-  reload
-</div>
-list
-<ul>
-  <li *ngFor="let book of books">{{book.name}}</li>
-</ul>
+<input #searchBox (keyup)="search(searchBox.value)">
+<table>
+  <tr>
+    <th>書籍名</th>
+    <th>追加日</th>
+    <th></th>
+  </tr>
+  <tr *ngFor="let book of filteredBooks">
+    <td>{{book.name}}</td>
+    <td>{{book.arrivalDate}}</td>
+    <td (click)="borrow(book.id)">借りる</td>
+  </tr>
+</table>

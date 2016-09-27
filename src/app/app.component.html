@@ -2,10 +2,6 @@
   <a routerLink="/">{{title}}</a>
 </h1>
 
-<div (click)="reload()">
-  hogeeeeeeeee
-</div>
-
 <a routerLink="/login">ログイン</a>
 <a routerLink="/users/{{1}}">マイページ</a>
 <a routerLink="/requests">申請</a>
@@ -17,5 +13,5 @@
    <div id="{{googleLoginButtonId}}"></div>
  </div>
  <div class="main-application">
-   <p>Hello, {{userDisplayName}}!</p>
+   <p>Hello, {{user.name}}!</p>
  </div>

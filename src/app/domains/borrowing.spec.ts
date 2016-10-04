@@ -1,10 +1,10 @@
 /* tslint:disable:no-unused-variable */
 
 import { addProviders, async, inject } from '@angular/core/testing';
-import {UserInfo} from './user-info';
+import {Borrowing} from './borrowing';
 
-describe('UserInfo', () => {
+describe('Borrowing', () => {
   it('should create an instance', () => {
-    expect(new UserInfo()).toBeTruthy();
+    expect(new Borrowing()).toBeTruthy();
   });
 });

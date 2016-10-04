@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
+import { UserInfo } from './domains/user-info';
 
 @Injectable()
 export class AppService {
-
-  constructor() { }
-
+  loggedInUser: UserInfo;
+  constructor() {}
 }

@@ -7,7 +7,9 @@ import { SpreadsheetClient } from '../modules/spreadsheet-client.service'
 @Injectable()
 export class BookService {
   sheetName = 'book';
-  constructor(private sheetClient: SpreadsheetClient) {
+  // sheetClient = new SpreadsheetClient()
+  constructor(
+    private sheetClient: SpreadsheetClient) {
     // let dd = require('data-drive')
   }
 

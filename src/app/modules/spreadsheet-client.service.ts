@@ -5,10 +5,18 @@ import { AppSettings } from '../AppSettings';
 @Injectable()
 export class SpreadsheetClient {
   private sheetId: string;
-  constructor(private googleClient: GoogleApiService) {}
+  private sheetName: string;
+  constructor(
+    private googleClient: GoogleApiService
+  ) {}
 
   get(sheetName: string, range: string) {
     let url = `${AppSettings.SHEET_ENDPOINT}${AppSettings.SHEET_ID}/values/${sheetName}!${range}`;
     return this.googleClient.get(url);
+  }
+
+  post(sheetName: string, body, range: string = 'A1') {
+    let url = `${AppSettings.SHEET_ENDPOINT}${AppSettings.SHEET_ID}/values/${sheetName}!${range}:append?valueInputOption=USER_ENTERED`;
+    return this.googleClient.post(url, body);
   }
 }

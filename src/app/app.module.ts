@@ -11,6 +11,7 @@ import { UserComponent } from './components/user/user.component';
 import { LoginComponent } from './components/login/login.component'
 import { GoogleApiService } from './modules/google-api.service'
 import { SpreadsheetClient } from './modules/spreadsheet-client.service';
+import { AppService } from './app.service';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { SpreadsheetClient } from './modules/spreadsheet-client.service';
   providers: [
     appRoutingProviders,
     GoogleApiService,
-    SpreadsheetClient
+    SpreadsheetClient,
+    AppService
   ],
   bootstrap: [AppComponent]
 })

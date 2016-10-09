@@ -13,4 +13,8 @@ export class BorrowingService {
     console.log(borrowing.toFormat());
     return this.sheetClient.post(this.sheetName, borrowing.toFormat());
   }
+
+  findAll() {
+    return this.sheetClient.get('borrowing_history', 'A1:1000');
+  }
 }

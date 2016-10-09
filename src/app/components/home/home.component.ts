@@ -5,8 +5,10 @@ import { BookService } from '../../services/book.service'
 import { AppService } from '../../app.service'
 import { BorrowingService } from '../../services/borrowing.service'
 import { Book } from '../../domains/book';
+import { Borrowing } from '../../domains/borrowing';
 import { UserInfo } from '../../domains/user-info';
 
+enum BookState {Free, OnLoan, Own}
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -21,6 +23,7 @@ export class HomeComponent implements OnInit{
   googleLoginButtonId = "google-login-button";
   books: Book[];
   filteredBooks: Book[];
+  borrowingInfos: Borrowing[];
 
   constructor(
     private appService: AppService,
@@ -40,11 +43,17 @@ export class HomeComponent implements OnInit{
       return;
     }
     console.log('logginnnnnnnnnn!');
-    this.bookService.findAll().subscribe( res => {
-      this.books = res.json().values.map( row => {
-        return new Book(row[0], row[1], row[2], row[7]);
+    this.borrowingService.findAll().subscribe(borrowingRes => {
+      this.borrowingInfos = borrowingRes.json().values.map( row => {
+        return new Borrowing(row[0], row[1]);
       });
-      this.filteredBooks = this.books;
+      console.log(this.borrowingInfos);
+      this.bookService.findAll().subscribe( bookRes => {
+        this.books = bookRes.json().values.map( row => {
+          return new Book(row[0], row[1], row[2], row[7]);
+        });
+        this.filteredBooks = this.books;
+      });
     });
   }
 
@@ -52,7 +61,23 @@ export class HomeComponent implements OnInit{
     this.borrowingService.borrowing(bookId, this.appService.loggedInUser.email).subscribe( res => {
       console.log(res);
     });
+  }
 
+  checkBookState(bookId: number, loggedInUserId: string = this.appService.loggedInUser.email) {
+    // まだ返却してない貸出リスト
+
+    // 本のIDが一致するものを取り出す
+    let loanedInfo: Borrowing = this.borrowingInfos.filter(b => b.bookId === bookId).shift();
+
+    // 一致するものがなければ借りる
+    if (loanedInfo == null) {return '借りる'; };
+
+    // userIdが等しければ返却
+    if (loanedInfo.userId === loggedInUserId) {
+      return '返却';
+    }else {
+      return '貸出中';
+    }
   }
 
   search(keyword: string) {

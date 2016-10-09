@@ -11,6 +11,6 @@
   <tr *ngFor="let book of filteredBooks">
     <td>{{book.name}}</td>
     <td>{{book.arrivalDate}}</td>
-    <td (click)="borrow(book.id)">借りる</td>
+    <td (click)="borrow(book.id)">{{ checkBookState(book.id) }}</td>
   </tr>
 </table>

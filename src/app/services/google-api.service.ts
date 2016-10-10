@@ -45,4 +45,7 @@ export class GoogleApiService {
     return this.http.post(url, body, this.options);
   }
 
+  put(url, body) {
+    return this.http.put(url, body, this.options);
+  }
 }

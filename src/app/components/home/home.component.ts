@@ -24,6 +24,7 @@ export class HomeComponent implements OnInit{
   books: Book[];
   filteredBooks: Book[];
   borrowingInfos: Borrowing[];
+  bookState = BookState;
 
   constructor(
     private appService: AppService,
@@ -45,7 +46,7 @@ export class HomeComponent implements OnInit{
     console.log('logginnnnnnnnnn!');
     this.borrowingService.findAll().subscribe(borrowingRes => {
       this.borrowingInfos = borrowingRes.json().values.map( row => {
-        return new Borrowing(row[0], row[1]);
+        return new Borrowing(row[0], row[1], row[2]);
       });
       console.log(this.borrowingInfos);
       this.bookService.findAll().subscribe( bookRes => {
@@ -58,25 +59,39 @@ export class HomeComponent implements OnInit{
   }
 
   borrow(bookId: number) {
-    this.borrowingService.borrowing(bookId, this.appService.loggedInUser.email).subscribe( res => {
+    let userId = this.appService.loggedInUser.email;
+    this.borrowingService.borrowing(bookId, userId).subscribe( res => {
+      console.log(res);
+      this.borrowingInfos.push(new Borrowing(bookId, userId, new Date()));
+    });
+  }
+
+  return(bookId: number) {
+    let userId = this.appService.loggedInUser.email;
+    let myBorrowing = this.borrowingInfos.filter(b => b.bookId === bookId && b.userId === userId && b.returnedDate === null)[0];
+    // console.log(myBorrowing);
+    let index = this.borrowingInfos.lastIndexOf(myBorrowing);
+    this.borrowingService.return(index, myBorrowing, new Date()).subscribe( res => {
       console.log(res);
     });
+    console.log(bookId + index);
   }
 
   checkBookState(bookId: number, loggedInUserId: string = this.appService.loggedInUser.email) {
     // まだ返却してない貸出リスト
+    let borrowingInfoList = this.borrowingInfos.filter(b => b.returnedDate === null);
 
-    // 本のIDが一致するものを取り出す
-    let loanedInfo: Borrowing = this.borrowingInfos.filter(b => b.bookId === bookId).shift();
+    // 本のIDが一致する最初ものを取り出す
+    let loanedInfo: Borrowing = borrowingInfoList.filter(b => b.bookId === bookId).shift();
 
     // 一致するものがなければ借りる
-    if (loanedInfo == null) {return '借りる'; };
+    if (loanedInfo == null) {return BookState.Free; };
 
     // userIdが等しければ返却
     if (loanedInfo.userId === loggedInUserId) {
-      return '返却';
+      return BookState.Own;
     }else {
-      return '貸出中';
+      return BookState.OnLoan;
     }
   }
 

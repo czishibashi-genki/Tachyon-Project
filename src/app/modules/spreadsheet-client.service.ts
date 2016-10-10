@@ -19,4 +19,9 @@ export class SpreadsheetClient {
     let url = `${AppSettings.SHEET_ENDPOINT}${AppSettings.SHEET_ID}/values/${sheetName}!${range}:append?valueInputOption=USER_ENTERED`;
     return this.googleClient.post(url, body);
   }
+
+  put(sheetName: string, body: string, range: string) {
+    let url = `${AppSettings.SHEET_ENDPOINT}${AppSettings.SHEET_ID}/values/${sheetName}!${range}?valueInputOption=USER_ENTERED`;
+    return this.googleClient.put(url, body);
+  }
 }

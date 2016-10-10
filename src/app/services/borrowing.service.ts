@@ -9,12 +9,19 @@ export class BorrowingService {
 
   borrowing(bookId: number, email: string) {
     console.log(`borrowing bookId: ${bookId}, userId: ${email}`);
-    let borrowing = new Borrowing(bookId, email);
+    let borrowing = new Borrowing(bookId, email, new Date());
     console.log(borrowing.toFormat());
     return this.sheetClient.post(this.sheetName, borrowing.toFormat());
   }
 
   findAll() {
-    return this.sheetClient.get('borrowing_history', 'A1:1000');
+    return this.sheetClient.get(this.sheetName, 'A1:1000');
+  }
+
+  // index行の返却日付を更新
+  return(index: number, borrowingInfo: Borrowing, returnedDate: Date) {
+    console.log(index + returnedDate.toString());
+    borrowingInfo.returnedDate = returnedDate;
+    return this.sheetClient.put(this.sheetName, borrowingInfo.toFormat(), `A${index + 1}`);
   }
 }
